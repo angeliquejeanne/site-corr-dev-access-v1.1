@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    
+    <title>Correction DEV – Access Card – Warren Walter</title>
+    
+    <link rel="stylesheet" href="./src/styles/styles.css">
+</head>
+<!-- 
+- Créer une page web avec un formulaire de N cases à cocher + un compteur ;
+- Les cases à cocher reprennent les bonnes réponses (voir en dessous) ;
+- Quand une case est cochée, le compteur est incrémenté ;
+- Quand une case est décochée, le compteur est desincrémenté ;
+- Pas besoin de base de donnée, tout se fait en front en JS ;
+- Tu es libre de la techno – il faut que le site respecte toutes les règles de l'accessibilité ;
+- Code couleur de Warren Walter (voir le site) ;
+exemple de rendu attendu :
+<img src="./src/img/unnamed.png" alt="">
+ -->
+<body>
+    <header role="banner" class="header">
+        <div class="logo"><img src="https://www.warren-walter.com/wp-content/uploads/2021/01/WarrenWalter_logo_light.svg" alt="Warren Walter"></div>
+        <h1 class="h1">Exercice DEV : Access Card</h1>
+    </header>
+
+    <main class="main" role="main">
+
+        <form action="#" class="corrections">
+
+            <fieldset>
+                
+                <legend>Dans le document :</legend>
+                
+                <div>
+                    <input type="checkbox" name="doc-rep-1" id="doc-rep-1" class="checkbox">
+                    <label for="doc-rep-1">L'attribut lang sur le html doit être FR</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" name="doc-rep-2" id="doc-rep-2" class="checkbox">
+                    <label for="doc-rep-2">Alt de l'image : le supprimer car elle est décorative</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" name="doc-rep-3" id="doc-rep-3" class="checkbox">
+                    <label for="doc-rep-3">252 est le nombre de commentaire. Il faut indiquer explicitement "commentaires" dans le code</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" name="doc-rep-4" id="doc-rep-4" class="checkbox">
+                    <label for="doc-rep-4">Les textes : "Camping", "Randonnée" et "voir" doivent être des liens</label>
+                </div>
+                
+                <div>
+                    <input type="checkbox" name="doc-rep-5" id="doc-rep-5" class="checkbox">
+                    <label for="doc-rep-5">Les liens "Camping", "Randonnée" doivent être dans un &lt;ul&gt; &lt;li&gt;</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-6" id="doc-rep-6" class="checkbox">
+                    <label for="doc-rep-6">Le texte "Park Sexten en caravane" doit être dans un HN</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-7" id="doc-rep-7" class="checkbox">
+                    <label for="doc-rep-7">Le texte "Lorem ipsum" doit être dans un &lt;p&gt;</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-8" id="doc-rep-8" class="checkbox">
+                    <label for="doc-rep-8">Le texte "125 €" doit indiquer le prix (visuellement ou dans le code)</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-9" id="doc-rep-9" class="checkbox">
+                    <label for="doc-rep-9">Le lien "Voir" doit être plus explicite (ex : voir la randonnée Park Sexten en caravane)</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-10" id="doc-rep-10" class="checkbox">
+                    <label for="doc-rep-10">En CSS : la "card" doit faire 300px de large</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="doc-rep-11" id="doc-rep-11" class="checkbox">
+                    <label for="doc-rep-11">Bonus : Retravailler le / de "4,5 / 5" pour qu'il dise "sur" et non "barre oblique"</label>
+                </div>
+
+            </fieldset>
+       
+        </form>
+
+        <form class="register-candidat" id="registerCandidat" method="get">
+            <fieldset>
+                <legend></legend>
+
+                <section class="compteur">
+                    <p aria-live="assertive">Nombre de point : <span class="total" id="total">0</span></p>
+                </section>
+                
+                <div>
+                    <label for="nom">Nom</label>
+                    <input type="text" class="nom" id="nom" name="nom">
+                </div>
+                <div>
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="prenom" id="prenom" name="prenom">
+                </div>
+                <div>
+                    <label for="resul">Résultat</label>
+                    <input type="text" class="result" id="result" name="result">
+                </div>
+                <div>
+                    <label for="commentaire">Message</label>
+                    <textarea name="commentaire" id="commentaire" cols="30" rows="10"></textarea>
+                </div>
+
+                <button type="submit" id="enregistrer" name="enregistrer">Enregistrer</button>
+            </fieldset>
+        </form>
+        
+
+    </main>
+
+    <footer class="footer">
+        <p>© Warren Walter – Tous droits réservés</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="./src/script/jquery.serializeObject.min.js"></script>
+    <script src="./src/script/Increment-Decrement.js"></script>
+
+    <script>
+        
+        let $form = $('form#registerCandidat'),
+            url = 'https://script.google.com/a/macros/warren-walter.com/s/AKfycbxZfqD23I-e21FnDLr0OgNlFSsPGo5LXbxdaBru0z8vZLBBtrlbBpyaiMt33qH43eqD/exec';
+        
+            $('#enregistrer').on('click', function(e){
+            e.preventDefault();
+            let jqxhr = $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                data: $form.serializeObject()
+            }).done(function(){
+
+            });
+        });
+    </script>
+</body>
+</html>
